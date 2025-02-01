@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolagem de Dados</title>
+    <style>
+        .modal{
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dice{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid #000;
+        }
+
+        .red{background-color: red; color: white;}
+        .white{background-color: white; color: black;}
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <button id="startGameBtn">Iniciar Jogo</button>
+    <!-- <button id="rollDiceBtn">Rolar Dados</button> -->
+    <div id="turnIndicator">Truno do Jogador 1</div>
+    <div id="specialAbilityIndicator">Habilidade Especial Disponivel</div>
+    <button id="useSpecialAbilityBtn">Usar Habilidade Especial</button>
+    <div id="diceModal" class="modal">
+        <div id="dice1" class="dice red"></div>
+        <div id="dice2" class="dice white"></div>
+        <div id="resultMessage" class="message"></div>
+        <button id="closeModalBtn">Fechar</button>
+        <button id="nextTurnBtn">Próximo Turno</button>
+    </div>
+
+    <script src="js/charset.js"></script>
+    <script src="js/dice.js"></script>
+    
+</body>
+</html>

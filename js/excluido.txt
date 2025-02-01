@@ -1,0 +1,65 @@
+for (let i = 0; i < rolls; i++) {
+        setTimeout(() => {
+            if (success) return; // Parando a rolagem se houver sucesso.
+
+            let redDice = Math.floor(Math.random() * 6) + 1;
+            let whiteDice = Math.floor(Math.random() * 6) + 1;
+
+            document.getElementById('dice1').innerText = redDice;
+            document.getElementById('dice2').innerText = whiteDice;
+
+            if (redDice === 1){
+                redDiceCrits++;
+                hits = 0; // Desconsiderar acertos anteriores.
+            } else if (redDice >= attribute) {
+                if (redDiceCrits > 0){
+                    redDiceCrits--;
+                } else {
+                    hits++; 
+                }
+            }
+
+            // if (redDiceCrits > 0 && redDice >= attribute) {
+            //     redDiceCrits--;   
+            // }else if(redDice < attribute) {
+            //     console.log('Jogada errada');
+            // }
+
+            if (redDice === 6 && whiteDice === 6) {
+                redDiceCrits = 0;
+                success = true;
+                console.log('Sucesso!');
+            }
+
+            document.getElementById('diceModal').style.display = 'block';
+
+            if (i === rolls - 1 || success) {
+                let resultMessage = `Críticos acumulados: ${redDiceCrits}\nAcertos: ${hits}`;
+
+
+                if (success) {
+                    resultMessage = "Ação bem-sucedida sem possibilidade de esquiva!";
+                } else if (hits > 0) { 
+                    resultMessage = handleOpponentDodge(hits);
+                } else if (redDiceCrits > 0) {
+                    resultMessage = 'Ação falhou devido a críticos acumulados.';
+                } else {
+                    resultMessage = `Ação falhou. \nAcertos: ${hits}`;
+                }
+
+                // if (success || hits > 0) {
+                //     resultMessage = "Ação bem-sucedida!";
+                // } else if (redDiceCrits > 0) {
+                //     resultMessage = "Ação falhou devido a criticos acumulados.";
+                // } else {
+                //     resultMessage = `Ação falho. \nAcertos: ${hits}`;
+                // }
+
+                document.getElementById('resultMessage').innerText = resultMessage;
+
+                setTimeout(() => {
+                    document.getElementById('diceModal').style.display = 'none';
+                }, 2000);
+            }
+        }, i * 1000); //Atraso de 1 segundo entre cada jogada.
+    }
